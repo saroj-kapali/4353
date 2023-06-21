@@ -115,7 +115,6 @@ def fuel_price_form():
             profit_fee = 2.00            
 
         price = (3.36 * gallons) + (gallons * location_fee) + (gallons * discount_rate) + (gallons * profit_fee)
-        price_per_gallon = 3.36 + location_fee + discount_rate + profit_fee
         print(price)
 
         fuel_order_form_data = FuelOrderFormData(
@@ -132,10 +131,9 @@ def fuel_price_form():
         
         db.session.add(fuel_order_form_data)
         db.session.commit()
-        
         flash("Fuel ordered successfully!")
 
-        return render_template("fuel_price_form.html", user=current_user, price=price, address_1=profile_data.address_1, price_per_gallon=price_per_gallon)
+        return render_template("fuel_price_form.html", user=current_user, price=price)
     
     return render_template("fuel_price_form.html", user=current_user, price=price)
 
